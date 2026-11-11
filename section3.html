@@ -1,0 +1,171 @@
+<style type="text/css">
+    .slider {
+        position: relative;
+        width: 100%;
+        max-width: 1940px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    .slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%;
+    }
+
+    .slide {
+        min-width: 100%;
+    }
+
+    .slide img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .dots {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 10;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #ccc;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .dot.active {
+        background-color: #333;
+    }
+
+    .section3-content {
+        padding: 40px;
+        background-color: #f0f1f1;
+    }
+
+    .section3-content h3 {
+        font-size: 1.5em;
+        font-weight: bold;
+        padding-bottom: 20px;
+        line-height: 1.4;
+    }
+
+    .section3-content p {
+        margin-bottom: 12px;
+    }
+
+    .section3-content .gen-border-grey {
+        min-width: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .section3-content .gen-border-grey > img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .section3-card {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        min-width: 0;
+    }
+
+    .section3-card strong {
+        display: block;
+        color: #e71316;
+        margin-bottom: 10px;
+    }
+
+    .section3-card p {
+        width: 100%;
+        max-width: 100%;
+        line-height: 1.5;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        white-space: normal;
+        box-sizing: border-box;
+    }
+</style>
+
+<section class="section3">
+
+    <div class="section3-content gen-grid">
+        <div class="align-vertical">
+            <h3>Sanger Sequencing and Fragment <br>Analysis Software</h3>
+
+            <p>• MicrobeBridge Software</p>
+            <p>• Minor Variant Finder Software</p>
+            <p>• SeqScreener Gene Edit</p>
+            <p>• InnoviGene Suite</p>
+        </div>
+
+        <div class="gen-border-grey">
+            <img
+                 src="https://www.thermofisher.com/content/dam/LifeTech/latin-america/2026/banners/eletroforese-capilar/man.jpg"
+                 alt="Suporte à análise de fragmentos">
+
+            <div class="section3-card">
+                <strong>Soporte al análisis de fragmentos</strong>
+
+                <p>
+                    Encuentra FAQs, solución de problemas, guías y herramientas para aplicaciones en análisis de fragmentos.
+                </p>
+
+                <a class="gen-link"
+                   href="https://www.thermofisher.com/br/en/home/life-science/sequencing/sanger-sequencing/sanger-dna-sequencing/sanger-sequencing-data-analysis.html">Acceder al soporte
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const slidesContainer = document.getElementById('slides');
+    const dots = document.querySelectorAll('.dot');
+    let currentIndex = 0;
+    const totalSlides = dots.length;
+
+    function goToSlide(index) {
+        const slider = document.getElementById('bannerSlider');
+        const slideWidth = slider.offsetWidth;
+
+        slidesContainer.style.transform = `translateX(-${index * slideWidth}px)`;
+
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+
+        currentIndex = index;
+    }
+
+    function nextSlide() {
+        const nextIndex = (currentIndex + 1) % totalSlides;
+        goToSlide(nextIndex);
+    }
+
+    goToSlide(0);
+
+    let interval = setInterval(nextSlide, 7000);
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            clearInterval(interval);
+            goToSlide(parseInt(dot.getAttribute('data-index')));
+            interval = setInterval(nextSlide, 7000);
+        });
+    });
+
+    window.addEventListener('resize', () => {
+        goToSlide(currentIndex);
+    });
+</script>
